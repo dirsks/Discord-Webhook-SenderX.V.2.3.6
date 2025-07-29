@@ -58,7 +58,7 @@ return function()
 		Body = json
 	})
 
-	if _G.web and _G.web.Notify then
+	if _G.web and _G.web.Notify ~= false or _G.web.Notify ~= nil then
 		pcall(function()
 			game:GetService("StarterGui"):SetCore("SendNotification", {
 				Title = "Message Sent",
@@ -100,7 +100,7 @@ return function()
 		Body = body
 	})
 
-	if _G.web and _G.web.Notify then
+	if _G.web and _G.web.Notify ~= false or _G.web.Notify ~= nil then
 		pcall(function()
 			game:GetService("StarterGui"):SetCore("SendNotification", {
 				Title = "Embed Sent",
