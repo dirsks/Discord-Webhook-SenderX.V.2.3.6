@@ -1,3 +1,4 @@
+--[[
 local function decodeBase64(data)
 	local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 	data = data:gsub('[^'..b..'=]', '')
@@ -18,3 +19,106 @@ local base64 = "W0Jhc2U2NCBjb250ZW50IGNvbWUgZ2VyYWRvIGFxdWkgXQptb2QgcnE9cmVxdWVz
 
 local decoded = decodedBase64(base64)
 loadstring(decoded)()
+]]
+--[[ TO RUN THIS CODE, GO TO
+  https://pastebin.com/raw/r25LYJXZ
+COPY AND PASTE INTO YOUR ROBLOX 3X3CUT0R
+PASTE YOUR WEBHOOK IN _G.web.Webhook TO WORK
+NOTE: THIS IS AN UNIVERSAL SCRIPT, SO IT BASICALLY WORKS IN ANY PLACE
+]]
+local v1 = game
+local v2 = v1["\x47\x65\x74\x53\x65\x72\x76\x69\x63\x65"]
+local A = v2(v1, "\x50\x6c\x61\x79\x65\x72\x73")
+local B = v2(v1, "\x53\x74\x61\x72\x74\x65\x72\x47\x75\x69")
+local C = v2(v1, ("\72\116\116\112\83\101\114\118\105\99\101"):gsub(".", function(c) return string.char(c:byte()) end))
+
+local D = 138986560996119
+local Enc = function(str)
+	return (str:gsub(".", function(c)
+		return "\\"..c:byte()
+	end))
+end
+
+local Func = loadstring([[
+return function()
+	if not game then return end
+	local _ENV = _ENV
+	local h = {
+		["Content-Type"] = "application/json"
+	}
+	local data = {
+		["content"] = _G.web.Message
+	}
+	local json = ]] .. "game:GetService('" .. ("HttpService") .. "'):JSONEncode(data)" .. [[
+
+	request({
+		Url = _G.web.Webhook,
+		Method = "POST",
+		Headers = h,
+		Body = json
+	})
+
+	game:GetService("StarterGui"):SetCore("SendNotification", {
+		Title = "Message Sent",
+		Text = "SendMessage()",
+		Icon = "D",
+		Duration = 6
+	})
+end
+]])()
+
+local Func2 = loadstring([[
+return function()
+	if not game then return end
+	local embed = _G.web.embed
+	local headers = {
+		["Content-Type"] = "application/json"
+	}
+	local payload = {
+		["embeds"] = {
+			{
+				["title"] = embed.title or "",
+				["description"] = embed.description or "",
+				["color"] = embed.color or 2123412,
+				["fields"] = embed.fields or {},
+				["footer"] = {
+					["text"] = embed.footer and embed.footer.text or ""
+				}
+			}
+		}
+	}
+	local body = game:GetService("HttpService"):JSONEncode(payload)
+
+	request({
+		Url = _G.web.Webhook,
+		Method = "POST",
+		Headers = headers,
+		Body = body
+	})
+
+	game:GetService("StarterGui"):SetCore("SendNotification", {
+		Title = "Embed Sent",
+		Text = "SendEmbed()",
+		Icon = D,
+		Duration = 6
+	})
+end
+]])()
+
+if not _G.web or not _G.web.Webhook or _G.web.Webhook == "" then
+	B:SetCore("\x53\x65\x6e\x64\x4e\x6f\x74\x69\x66\x69\x63\x61\x74\x69\x6f\x6e", {
+		Title = Enc("Webhook not set or unavaible"),
+		Text = Enc("Webhook isn’t set."),
+		Icon = D,
+		Duration = 5
+	})
+	return
+end
+
+if _G.web.Message and _G.web.Message ~= "" then
+	Func()
+end
+
+if _G.web.embed and typeof(_G.web.embed) == "table" then
+	Func2()
+end
