@@ -58,12 +58,16 @@ return function()
 		Body = json
 	})
 
-	game:GetService("StarterGui"):SetCore("SendNotification", {
-		Title = "Message Sent",
-		Text = "SendMessage()",
-		Icon = "D",
-		Duration = 6
-	})
+	if _G.web and _G.web.Notify then
+		pcall(function()
+			game:GetService("StarterGui"):SetCore("SendNotification", {
+				Title = "Message Sent",
+				Text = "SendMessage()",
+				Icon = "rbxassetid://".. D,
+				Duration = 6
+			})
+		end)
+	end
 end
 ]])()
 
@@ -96,20 +100,24 @@ return function()
 		Body = body
 	})
 
-	game:GetService("StarterGui"):SetCore("SendNotification", {
-		Title = "Embed Sent",
-		Text = "SendEmbed()",
-		Icon = D,
-		Duration = 6
-	})
+	if _G.web and _G.web.Notify then
+		pcall(function()
+			game:GetService("StarterGui"):SetCore("SendNotification", {
+				Title = "Embed Sent",
+				Text = "SendMessageEMBED()",
+				Icon = "rbxassetid://".. D,
+				Duration = 6
+			})
+		end)
+	end
 end
 ]])()
 
 if not _G.web or not _G.web.Webhook or _G.web.Webhook == "" then
 	B:SetCore("\x53\x65\x6e\x64\x4e\x6f\x74\x69\x66\x69\x63\x61\x74\x69\x6f\x6e", {
-		Title = Enc("Webhook not set or unavaible"),
+		Title = Enc("Error"),
 		Text = Enc("Webhook isn’t set."),
-		Icon = D,
+		Icon = "rbxassetid://".. D,
 		Duration = 5
 	})
 	return
