@@ -73,18 +73,21 @@ return function()
 		["Content-Type"] = "application/json"
 	}
 	local payload = {
-		["embeds"] = {
-			{
-				["title"] = embed.title or "",
-				["description"] = embed.description or "",
-				["color"] = embed.color or 2123412,
-				["fields"] = embed.fields or {},
-				["footer"] = {
-					["text"] = embed.footer and embed.footer.text or ""
-				}
-			}
-		}
-	}
+    ["embeds"] = {
+        {
+            ["title"] = embed.title or "",
+            ["description"] = embed.description or "",
+            ["color"] = embed.color or 2123412,
+            ["fields"] = embed.fields or {},
+            ["footer"] = {
+                ["text"] = embed.footer and embed.footer.text or ""
+            },
+            ["thumbnail"] = embed.thumbnail and { url = embed.thumbnail.url } or nil,
+            ["image"] = embed.image and { url = embed.image.url } or nil
+        }
+    },
+    ["components"] = _G.web.components or nil
+}
 	local body = game:GetService("HttpService"):JSONEncode(payload)
 
 	request({
