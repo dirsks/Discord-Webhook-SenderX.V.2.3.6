@@ -52,15 +52,13 @@ return function()
 		Body = json
 	})
 
-	if _G.web and _G.web.Notify ~= false or _G.web.Notify ~= nil then
-		pcall(function()
-			game:GetService("StarterGui"):SetCore("SendNotification", {
-				Title = "Message Sent",
-				Text = "SendMessage()",
-				Icon = "rbxassetid://".. D,
-				Duration = 6
-			})
-		end)
+	if _G.web and _G.web.Notify == true then
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = "Message Sent",
+			Text = "SendMessage()",
+			Icon = "rbxassetid://".. D,
+			Duration = 6
+		})
 	end
 end
 ]])()
@@ -73,11 +71,13 @@ return function()
 		["Content-Type"] = "application/json"
 	}
 	local payload = {
+    username = _G.web.username or nil,
+    avatar_url = _G.web.avatar_url or nil,
     ["embeds"] = {
         {
             ["title"] = embed.title or "",
             ["description"] = embed.description or "",
-            ["color"] = embed.color or 2123412,
+            ["color"] = embed.color,
             ["fields"] = embed.fields or {},
             ["footer"] = {
                 ["text"] = embed.footer and embed.footer.text or ""
@@ -97,28 +97,16 @@ return function()
 		Body = body
 	})
 
-	if _G.web and _G.web.Notify ~= false or _G.web.Notify ~= nil then
-		pcall(function()
-			game:GetService("StarterGui"):SetCore("SendNotification", {
-				Title = "Embed Sent",
-				Text = "SendMessageEMBED()",
-				Icon = "rbxassetid://".. D,
-				Duration = 6
-			})
-		end)
+	if _G.web and _G.web.Notify == true then
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = "Embed Sent",
+			Text = "SendMessageEMBED()",
+			Icon = "rbxassetid://".. 138986560996119,
+			Duration = 6
+		})
 	end
 end
 ]])()
-
-if not _G.web or not _G.web.Webhook or _G.web.Webhook == "" then
-	B:SetCore("\x53\x65\x6e\x64\x4e\x6f\x74\x69\x66\x69\x63\x61\x74\x69\x6f\x6e", {
-		Title = Enc("Error"),
-		Text = Enc("Webhook isn’t set."),
-		Icon = "rbxassetid://".. D,
-		Duration = 5
-	})
-	return
-end
 
 if _G.web.Message and _G.web.Message ~= "" then
 	Func()
